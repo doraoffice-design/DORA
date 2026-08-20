@@ -70,7 +70,7 @@ export function DashboardTopbar({ title }: { title: string }) {
               <DropdownMenuLabel>Demo — switch role</DropdownMenuLabel>
               <DropdownMenuSeparator />
               {ALL_ROLES.map((role) => (
-                <DropdownMenuItem key={role} onSelect={() => switchRole(role)}>
+                <DropdownMenuItem key={role} onClick={() => switchRole(role)}>
                   {ROLE_LABELS[role]}
                   {role === currentUser.role && (
                     <span className="ml-auto text-xs text-muted-foreground">current</span>
@@ -104,7 +104,7 @@ export function DashboardTopbar({ title }: { title: string }) {
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onSelect={logout} variant="destructive">
+              <DropdownMenuItem onClick={logout} variant="destructive">
                 <LogOut className="size-4" />
                 Log out
               </DropdownMenuItem>
