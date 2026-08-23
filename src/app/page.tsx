@@ -30,7 +30,13 @@ export default function PublicHomePage() {
               <span className="text-xs text-muted-foreground">IIT Mandi</span>
             </div>
           </div>
-          <Button variant="outline" size="sm" className="gap-1.5" render={<Link href="/dashboard" />}>
+          <Button
+            variant="outline"
+            size="sm"
+            className="gap-1.5"
+            nativeButton={false}
+            render={<Link href="/dashboard" />}
+          >
             Staff Portal
             <ArrowRight className="size-3.5" />
           </Button>
@@ -100,7 +106,11 @@ export default function PublicHomePage() {
               the DORA office — we&apos;ll help you find the right area of
               impact.
             </p>
-            <Button className="gap-1.5" render={<a href="mailto:dora@iitmandi.ac.in" />}>
+            <Button
+              className="gap-1.5"
+              nativeButton={false}
+              render={<a href="mailto:dora@iitmandi.ac.in" />}
+            >
               Contact DORA
               <ArrowRight className="size-3.5" />
             </Button>
