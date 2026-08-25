@@ -82,7 +82,7 @@ export const initialFunds: EndowmentFund[] = [
     corpusValue: 8000000,
     currentBalance: 8960000,
     purpose: "Fellowships for women graduate researchers in core sciences",
-    donorName: "Meera Krishnan (Alumna, B.Tech 2004)",
+    donorName: "Meera Krishnan",
     establishedDate: "2021-11-20",
     status: "Active",
     yieldRecords: [

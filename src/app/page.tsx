@@ -30,16 +30,27 @@ export default function PublicHomePage() {
               <span className="text-xs text-muted-foreground">IIT Mandi</span>
             </div>
           </div>
-          <Button
-            variant="outline"
-            size="sm"
-            className="gap-1.5"
-            nativeButton={false}
-            render={<Link href="/dashboard" />}
-          >
-            Staff Portal
-            <ArrowRight className="size-3.5" />
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="gap-1.5"
+              nativeButton={false}
+              render={<Link href="/donor-portal" />}
+            >
+              Donor Login
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              className="gap-1.5"
+              nativeButton={false}
+              render={<Link href="/dashboard" />}
+            >
+              Staff Portal
+              <ArrowRight className="size-3.5" />
+            </Button>
+          </div>
         </div>
       </header>
 
