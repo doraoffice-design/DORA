@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Handshake, Landmark, Mail } from "lucide-react";
+import { ArrowRight, Download, Handshake, Landmark, Mail } from "lucide-react";
 
 import { StatusBadge } from "@/components/status-badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -19,6 +19,41 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { formatDate, formatINR } from "@/lib/format";
 import { useStore } from "@/lib/store";
+import type { CSRGrant, GrantMilestone } from "@/lib/types";
+
+// Placeholder UC text, generated client-side from mock milestone data — real
+// UCs will be uploaded documents served from storage once that exists; this
+// just makes the download flow demoable now.
+function downloadUtilizationCertificate(grant: CSRGrant, milestone: GrantMilestone) {
+  const lines = [
+    "UTILIZATION CERTIFICATE",
+    "",
+    `Grant: ${grant.grantTitle}`,
+    `Donor / Partner: ${grant.companyName}`,
+    `CSR Act Section: ${grant.csrActSection}`,
+    "",
+    `Milestone: ${milestone.title}`,
+    `Amount Utilized: ${formatINR(milestone.amount)}`,
+    `Due Date: ${formatDate(milestone.dueDate)}`,
+    milestone.evidenceNote ? `Utilization Summary: ${milestone.evidenceNote}` : null,
+    milestone.disbursedBy ? `Certified & Disbursed By: ${milestone.disbursedBy}, IIT Mandi` : null,
+    "",
+    "Dean of Resources & Alumni Affairs (DORA), IIT Mandi",
+    `Generated: ${formatDate(new Date().toISOString())}`,
+  ]
+    .filter((line): line is string => line !== null)
+    .join("\n");
+
+  const blob = new Blob([lines], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `UC-${grant.companyName.replace(/\s+/g, "-")}-${milestone.title.replace(/\s+/g, "-")}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
 
 function initials(name: string) {
   return name
@@ -178,7 +213,20 @@ export default function DonorPortalPage() {
                             className="flex items-center justify-between rounded-md border px-3 py-2"
                           >
                             <span>{m.title}</span>
-                            <StatusBadge status={m.status} />
+                            <div className="flex items-center gap-2">
+                              <StatusBadge status={m.status} />
+                              {m.status === "Disbursed" && (
+                                <Button
+                                  variant="ghost"
+                                  size="xs"
+                                  className="gap-1"
+                                  onClick={() => downloadUtilizationCertificate(grant, m)}
+                                >
+                                  <Download className="size-3" />
+                                  UC
+                                </Button>
+                              )}
+                            </div>
                           </div>
                         ))}
                       </div>
