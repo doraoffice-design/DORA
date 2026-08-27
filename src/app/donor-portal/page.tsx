@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Download, Handshake, Landmark, Mail } from "lucide-react";
+import { ArrowRight, Download, FileText, Handshake, Landmark, Mail } from "lucide-react";
 
 import { StatusBadge } from "@/components/status-badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -17,38 +17,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { donorDocuments } from "@/lib/donor-portal-actions";
 import { formatDate, formatINR } from "@/lib/format";
 import { useStore } from "@/lib/store";
-import type { CSRGrant, GrantMilestone } from "@/lib/types";
 
-// Placeholder UC text, generated client-side from mock milestone data — real
-// UCs will be uploaded documents served from storage once that exists; this
-// just makes the download flow demoable now.
-function downloadUtilizationCertificate(grant: CSRGrant, milestone: GrantMilestone) {
-  const lines = [
-    "UTILIZATION CERTIFICATE",
-    "",
-    `Grant: ${grant.grantTitle}`,
-    `Donor / Partner: ${grant.companyName}`,
-    `CSR Act Section: ${grant.csrActSection}`,
-    "",
-    `Milestone: ${milestone.title}`,
-    `Amount Utilized: ${formatINR(milestone.amount)}`,
-    `Due Date: ${formatDate(milestone.dueDate)}`,
-    milestone.evidenceNote ? `Utilization Summary: ${milestone.evidenceNote}` : null,
-    milestone.disbursedBy ? `Certified & Disbursed By: ${milestone.disbursedBy}, IIT Mandi` : null,
-    "",
-    "Dean of Resources & Alumni Affairs (DORA), IIT Mandi",
-    `Generated: ${formatDate(new Date().toISOString())}`,
-  ]
-    .filter((line): line is string => line !== null)
-    .join("\n");
-
-  const blob = new Blob([lines], { type: "text/plain" });
+function downloadTextFile(fileName: string, content: string) {
+  const blob = new Blob([content], { type: "text/plain" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `UC-${grant.companyName.replace(/\s+/g, "-")}-${milestone.title.replace(/\s+/g, "-")}.txt`;
+  a.download = fileName;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -73,6 +51,7 @@ export default function DonorPortalPage() {
   const supportedFunds = funds.filter((f) => f.donorName === donor.name);
   const supportedGrants = grants.filter((g) => g.companyName === donor.name);
   const hasGivingHistory = supportedFunds.length > 0 || supportedGrants.length > 0;
+  const documents = donorDocuments(donor, grants);
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
@@ -213,20 +192,7 @@ export default function DonorPortalPage() {
                             className="flex items-center justify-between rounded-md border px-3 py-2"
                           >
                             <span>{m.title}</span>
-                            <div className="flex items-center gap-2">
-                              <StatusBadge status={m.status} />
-                              {m.status === "Disbursed" && (
-                                <Button
-                                  variant="ghost"
-                                  size="xs"
-                                  className="gap-1"
-                                  onClick={() => downloadUtilizationCertificate(grant, m)}
-                                >
-                                  <Download className="size-3" />
-                                  UC
-                                </Button>
-                              )}
-                            </div>
+                            <StatusBadge status={m.status} />
                           </div>
                         ))}
                       </div>
@@ -236,6 +202,57 @@ export default function DonorPortalPage() {
               </Card>
             );
           })}
+        </div>
+
+        <div className="space-y-3">
+          <div>
+            <h2 className="text-sm font-semibold text-muted-foreground">Your documents</h2>
+            <p className="text-xs text-muted-foreground">
+              Utilization certificates for every disbursed milestone against your giving.
+            </p>
+          </div>
+
+          {documents.length === 0 ? (
+            <Card>
+              <CardContent className="py-10 text-center text-sm text-muted-foreground">
+                No documents yet. A utilization certificate becomes available here
+                once a milestone against your giving is disbursed.
+              </CardContent>
+            </Card>
+          ) : (
+            <Card>
+              <CardContent className="divide-y p-0">
+                {documents.map((doc) => (
+                  <div
+                    key={doc.id}
+                    className="flex items-center justify-between gap-4 px-4 py-3"
+                  >
+                    <div className="flex items-start gap-3">
+                      <FileText className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
+                      <div>
+                        <p className="text-sm font-medium">{doc.label}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {doc.detail}
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          {formatINR(doc.amount)} · {formatDate(doc.issuedOn)}
+                        </p>
+                      </div>
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="shrink-0 gap-1.5"
+                      onClick={() => downloadTextFile(doc.fileName, doc.content)}
+                    >
+                      <Download className="size-3.5" />
+                      Download
+                    </Button>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          )}
         </div>
 
         <Card className="bg-muted/30">
