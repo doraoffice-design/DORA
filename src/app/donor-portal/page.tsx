@@ -51,7 +51,7 @@ export default function DonorPortalPage() {
   const supportedFunds = funds.filter((f) => f.donorName === donor.name);
   const supportedGrants = grants.filter((g) => g.companyName === donor.name);
   const hasGivingHistory = supportedFunds.length > 0 || supportedGrants.length > 0;
-  const documents = donorDocuments(donor, grants);
+  const documents = donorDocuments(donor, funds, grants);
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
@@ -208,7 +208,8 @@ export default function DonorPortalPage() {
           <div>
             <h2 className="text-sm font-semibold text-muted-foreground">Your documents</h2>
             <p className="text-xs text-muted-foreground">
-              Utilization certificates for every disbursed milestone against your giving.
+              Agreements, tax receipts, and a utilization certificate for every
+              disbursed milestone against your giving.
             </p>
           </div>
 
@@ -235,7 +236,8 @@ export default function DonorPortalPage() {
                           {doc.detail}
                         </p>
                         <p className="text-xs text-muted-foreground">
-                          {formatINR(doc.amount)} · {formatDate(doc.issuedOn)}
+                          {doc.amount !== undefined && `${formatINR(doc.amount)} · `}
+                          {formatDate(doc.issuedOn)}
                         </p>
                       </div>
                     </div>
