@@ -2,7 +2,7 @@ import { createAuditEntry } from "./audit";
 import type { CSRGrant, CurrentUser, GrantMilestone, Role } from "./types";
 
 // Maker-checker gates for this module — display-only guards for the UI mockup.
-// Real enforcement happens server-side once this module is signed off (see DORA/CLAUDE.md).
+// Real enforcement happens server-side once this module is signed off.
 export function canCreateGrant(role: Role): boolean {
   return role === "CSR_GRANTS_OFFICER";
 }

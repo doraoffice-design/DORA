@@ -1,7 +1,7 @@
 import type { CorpusType, CurrentUser, EndowmentFund, FundYieldRecord } from "./types";
 
 // Maker-checker gate for this module — display-only guard for the UI mockup.
-// Real enforcement happens server-side once this module is signed off (see DORA/CLAUDE.md).
+// Real enforcement happens server-side once this module is signed off.
 export function canRecordFundYield(actor: CurrentUser): boolean {
   return actor.role === "ENDOWMENT_OFFICER";
 }

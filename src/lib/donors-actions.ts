@@ -1,7 +1,7 @@
 import type { Donor, DonorInteraction, DonorType, Role } from "./types";
 
 // Display-only guard for the UI mockup — real enforcement happens server-side
-// once this module is signed off (see DORA/CLAUDE.md).
+// once this module is signed off.
 export function canEditDonor(role: Role): boolean {
   return role === "FUNDRAISING_OFFICER" || role === "DEAN_APPROVER";
 }
