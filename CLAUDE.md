@@ -47,6 +47,7 @@ Do not build backend logic for a module ahead of its UI sign-off, and do not tre
 
 ## PR process
 
+- Never commit or push directly to `main`, no matter how small the change — always branch and open a PR. Commit and open PRs frequently, in small increments, rather than batching unrelated work into one large PR.
 - Every PR gets a Claude Code review pass before requesting human review.
 - PRs touching a load-bearing table (see Schema discipline above) or `lib/core/` need review from the team lead, not just any teammate.
 - Commit messages and PR descriptions should say which module/section of the proposal doc the change implements (e.g., "Section 2.4 — disbursement approval workflow").
