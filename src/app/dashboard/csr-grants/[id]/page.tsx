@@ -2,7 +2,7 @@
 
 import { use, useState } from "react";
 import { notFound } from "next/navigation";
-import { Check, FileText, IndianRupee, X } from "lucide-react";
+import { Check, Download, FileText, IndianRupee, Mail, Users, X } from "lucide-react";
 import { toast } from "sonner";
 
 import { PageShell } from "@/components/page-shell";
@@ -32,15 +32,29 @@ import { canViewAuditTrail } from "@/lib/audit";
 import {
   approveGrant,
   approveMilestone,
+  buildGrantMoU,
   canApproveMilestone,
   canDisburseMilestone,
   disburseMilestone,
+  grantMoUFileName,
   rejectGrant,
   rejectMilestone,
   submitMilestone,
 } from "@/lib/csr-grants-actions";
 import { useStore } from "@/lib/store";
-import type { AuditEntry, GrantMilestone, Role } from "@/lib/types";
+import type { AuditEntry, CSRGrant, GrantMilestone, ProjectMember, Role } from "@/lib/types";
+
+function downloadTextFile(fileName: string, content: string) {
+  const blob = new Blob([content], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = fileName;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
 
 export default function GrantDetailPage({ params }: PageProps<"/dashboard/csr-grants/[id]">) {
   const { id } = use(params);
@@ -138,6 +152,11 @@ export default function GrantDetailPage({ params }: PageProps<"/dashboard/csr-gr
         <SummaryCard label="Total amount" value={formatINR(grant.totalAmount)} />
         <SummaryCard label="Sanctioned" value={formatINR(grant.sanctionedAmount)} />
         <SummaryCard label="Disbursed" value={formatINR(grant.disbursedAmount)} />
+      </div>
+
+      <div className="grid gap-4 lg:grid-cols-2">
+        <ProjectTeamCard grant={grant} />
+        <MoUCard grant={grant} />
       </div>
 
       <Card>
@@ -280,6 +299,103 @@ function SummaryCard({ label, value }: { label: string; value: string }) {
       <CardContent className="pt-6">
         <p className="text-sm text-muted-foreground">{label}</p>
         <p className="mt-1 text-xl font-semibold tracking-tight">{value}</p>
+      </CardContent>
+    </Card>
+  );
+}
+
+function MemberRow({ member, lead }: { member: ProjectMember; lead?: boolean }) {
+  return (
+    <div className="flex items-start justify-between gap-3 border-b pb-3 text-sm last:border-0 last:pb-0">
+      <div>
+        <p className="font-medium">
+          {member.name}
+          {lead && <span className="ml-2 text-xs font-normal text-muted-foreground">Lead</span>}
+        </p>
+        <p className="text-xs text-muted-foreground">
+          {member.role} · {member.department}
+        </p>
+      </div>
+      {member.email && (
+        <a
+          href={`mailto:${member.email}`}
+          className="flex shrink-0 items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
+        >
+          <Mail className="size-3" />
+          {member.email}
+        </a>
+      )}
+    </div>
+  );
+}
+
+function ProjectTeamCard({ grant }: { grant: CSRGrant }) {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2 text-base">
+          <Users className="size-4 text-muted-foreground" />
+          Principal investigator &amp; team
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-3">
+        <MemberRow member={grant.principalInvestigator} lead />
+        {grant.team.map((member) => (
+          <MemberRow key={member.name} member={member} />
+        ))}
+        {grant.team.length === 0 && (
+          <p className="text-xs text-muted-foreground">No other team members recorded yet.</p>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
+function MoUCard({ grant }: { grant: CSRGrant }) {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2 text-base">
+          <FileText className="size-4 text-muted-foreground" />
+          Memorandum of Understanding
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-3 text-sm">
+        {grant.mou ? (
+          <>
+            <dl className="space-y-1.5 text-muted-foreground">
+              <div className="flex justify-between gap-3">
+                <dt>Reference</dt>
+                <dd className="font-medium text-foreground">{grant.mou.reference}</dd>
+              </div>
+              <div className="flex justify-between gap-3">
+                <dt>Signed</dt>
+                <dd className="text-foreground">{formatDate(grant.mou.signedDate)}</dd>
+              </div>
+              <div className="flex justify-between gap-3">
+                <dt>For IIT Mandi</dt>
+                <dd className="text-foreground">{grant.mou.instituteSignatory}</dd>
+              </div>
+              <div className="flex justify-between gap-3">
+                <dt>For {grant.companyName}</dt>
+                <dd className="text-foreground">{grant.mou.partnerSignatory}</dd>
+              </div>
+            </dl>
+            <Button
+              variant="outline"
+              size="sm"
+              className="gap-1.5"
+              onClick={() => downloadTextFile(grantMoUFileName(grant), buildGrantMoU(grant))}
+            >
+              <Download className="size-3.5" />
+              Download MoU
+            </Button>
+          </>
+        ) : (
+          <p className="text-muted-foreground">
+            No MoU on file yet — it is signed once the Dean approves the grant.
+          </p>
+        )}
       </CardContent>
     </Card>
   );

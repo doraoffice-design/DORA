@@ -151,6 +151,9 @@ export default function CSRGrantsPage() {
                     <p className="text-xs text-muted-foreground">
                       {grant.companyName} · {grant.csrActSection}
                     </p>
+                    <p className="text-xs text-muted-foreground">
+                      PI: {grant.principalInvestigator.name} · {grant.team.length + 1}-member team
+                    </p>
                   </TableCell>
                   <TableCell>{formatINR(grant.totalAmount)}</TableCell>
                   <TableCell>
@@ -191,9 +194,22 @@ function NewGrantDialog({ onCreate }: { onCreate: (grant: CSRGrant) => void }) {
   const [totalAmount, setTotalAmount] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [piName, setPiName] = useState("");
+  const [piDepartment, setPiDepartment] = useState("");
+  const [piEmail, setPiEmail] = useState("");
 
   const submit = () => {
-    if (!currentUser || !companyName || !grantTitle || !totalAmount || !startDate || !endDate) return;
+    if (
+      !currentUser ||
+      !companyName ||
+      !grantTitle ||
+      !totalAmount ||
+      !startDate ||
+      !endDate ||
+      !piName ||
+      !piDepartment
+    )
+      return;
     const input: NewGrantInput = {
       companyName,
       grantTitle,
@@ -201,6 +217,9 @@ function NewGrantDialog({ onCreate }: { onCreate: (grant: CSRGrant) => void }) {
       totalAmount: Number(totalAmount),
       startDate,
       endDate,
+      piName,
+      piDepartment,
+      piEmail,
     };
     onCreate(createGrant(input, currentUser));
   };
@@ -265,6 +284,34 @@ function NewGrantDialog({ onCreate }: { onCreate: (grant: CSRGrant) => void }) {
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="space-y-1.5">
+          <Label htmlFor="grant-pi">Principal investigator</Label>
+          <Input
+            id="grant-pi"
+            placeholder="Dr. …"
+            value={piName}
+            onChange={(e) => setPiName(e.target.value)}
+          />
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-1.5">
+            <Label htmlFor="grant-pi-dept">PI department / school</Label>
+            <Input
+              id="grant-pi-dept"
+              value={piDepartment}
+              onChange={(e) => setPiDepartment(e.target.value)}
+            />
+          </div>
+          <div className="space-y-1.5">
+            <Label htmlFor="grant-pi-email">PI email</Label>
+            <Input
+              id="grant-pi-email"
+              type="email"
+              value={piEmail}
+              onChange={(e) => setPiEmail(e.target.value)}
             />
           </div>
         </div>

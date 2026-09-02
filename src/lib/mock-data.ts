@@ -151,6 +151,36 @@ export const initialGrants: CSRGrant[] = [
     endDate: "2026-03-31",
     makerName: "Rohan Verma",
     approverName: "Dean, DORA",
+    principalInvestigator: {
+      name: "Dr. Aditya Kulkarni",
+      role: "Principal Investigator",
+      department: "School of Computing & Electrical Engineering",
+      email: "aditya.kulkarni@iitmandi.ac.in",
+    },
+    team: [
+      {
+        name: "Dr. Sneha Rao",
+        role: "Co-Principal Investigator",
+        department: "School of Civil & Environmental Engineering",
+        email: "sneha.rao@iitmandi.ac.in",
+      },
+      {
+        name: "Rahul Thakur",
+        role: "Project Research Associate",
+        department: "School of Computing & Electrical Engineering",
+      },
+      {
+        name: "Pooja Devi",
+        role: "Field Coordinator",
+        department: "Centre for Rural Development & Technology",
+      },
+    ],
+    mou: {
+      reference: "IITM/DORA/CSR/2024/017",
+      signedDate: "2024-08-28",
+      instituteSignatory: "Dean, DORA",
+      partnerSignatory: "Head — CSR, Tata Power Ltd.",
+    },
     milestones: [
       {
         id: "gm-1",
@@ -208,6 +238,31 @@ export const initialGrants: CSRGrant[] = [
     endDate: "2025-12-31",
     makerName: "Rohan Verma",
     approverName: "Dean, DORA",
+    principalInvestigator: {
+      name: "Dr. Meghna Sharma",
+      role: "Principal Investigator",
+      department: "School of Humanities & Social Sciences",
+      email: "meghna.sharma@iitmandi.ac.in",
+    },
+    team: [
+      {
+        name: "Dr. Karan Bhatt",
+        role: "Co-Principal Investigator",
+        department: "School of Computing & Electrical Engineering",
+        email: "karan.bhatt@iitmandi.ac.in",
+      },
+      {
+        name: "Ananya Gupta",
+        role: "Project Coordinator",
+        department: "School of Humanities & Social Sciences",
+      },
+    ],
+    mou: {
+      reference: "IITM/DORA/CSR/2024/021",
+      signedDate: "2024-12-18",
+      instituteSignatory: "Dean, DORA",
+      partnerSignatory: "Trustee, Infosys Foundation",
+    },
     milestones: [
       {
         id: "gm-5",
@@ -253,6 +308,21 @@ export const initialGrants: CSRGrant[] = [
     startDate: "2026-01-01",
     endDate: "2027-06-30",
     makerName: "Rohan Verma",
+    principalInvestigator: {
+      name: "Dr. Vivek Menon",
+      role: "Principal Investigator",
+      department: "School of Civil & Environmental Engineering",
+      email: "vivek.menon@iitmandi.ac.in",
+    },
+    team: [
+      {
+        name: "Dr. Ritu Anand",
+        role: "Co-Principal Investigator",
+        department: "School of Biosciences & Bioengineering",
+        email: "ritu.anand@iitmandi.ac.in",
+      },
+    ],
+    // MoU is signed only after the Dean approves the grant.
     milestones: [
       { id: "gm-8", title: "Needs assessment across 12 panchayats", dueDate: "2026-03-31", amount: 900000, status: "Pending" },
       { id: "gm-9", title: "Unit installation — Phase 1", dueDate: "2026-09-30", amount: 2600000, status: "Pending" },
@@ -275,6 +345,31 @@ export const initialGrants: CSRGrant[] = [
     endDate: "2024-11-30",
     makerName: "Rohan Verma",
     approverName: "Dean, DORA",
+    principalInvestigator: {
+      name: "Dr. Karan Bhatt",
+      role: "Principal Investigator",
+      department: "School of Computing & Electrical Engineering",
+      email: "karan.bhatt@iitmandi.ac.in",
+    },
+    team: [
+      {
+        name: "Dr. Nisha Pillai",
+        role: "Co-Principal Investigator",
+        department: "School of Mathematical & Statistical Sciences",
+        email: "nisha.pillai@iitmandi.ac.in",
+      },
+      {
+        name: "Sahil Verma",
+        role: "Teaching Fellow",
+        department: "School of Computing & Electrical Engineering",
+      },
+    ],
+    mou: {
+      reference: "IITM/DORA/CSR/2024/009",
+      signedDate: "2024-01-18",
+      instituteSignatory: "Dean, DORA",
+      partnerSignatory: "Lead — CSR, Wipro",
+    },
     milestones: [
       { id: "gm-11", title: "Bootcamp delivery — 200 students", dueDate: "2024-08-31", amount: 1800000, status: "Disbursed", approvedBy: "Dean, DORA", disbursedBy: "Finance Cell" },
       { id: "gm-12", title: "Placement outcomes report", dueDate: "2024-11-30", amount: 1000000, status: "Disbursed", approvedBy: "Dean, DORA", disbursedBy: "Finance Cell" },
@@ -298,6 +393,14 @@ export const initialGrants: CSRGrant[] = [
     endDate: "2026-05-31",
     makerName: "Rohan Verma",
     approverName: "Dean, DORA",
+    principalInvestigator: {
+      name: "Dr. Sandeep Yadav",
+      role: "Principal Investigator",
+      department: "School of Mechanical & Materials Engineering",
+      email: "sandeep.yadav@iitmandi.ac.in",
+    },
+    team: [],
+    // Grant rejected at approval — no MoU signed.
     milestones: [
       { id: "gm-13", title: "Center setup", dueDate: "2025-09-30", amount: 3000000, status: "Pending" },
       { id: "gm-14", title: "First cohort completion", dueDate: "2026-03-31", amount: 2100000, status: "Pending" },

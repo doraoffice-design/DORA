@@ -67,6 +67,20 @@ export type GrantStatus =
   | "Completed"
   | "Rejected";
 
+export interface ProjectMember {
+  name: string;
+  role: string;
+  department: string;
+  email?: string;
+}
+
+export interface ProjectMoU {
+  reference: string;
+  signedDate: string;
+  instituteSignatory: string;
+  partnerSignatory: string;
+}
+
 export interface CSRGrant {
   id: string;
   companyName: string;
@@ -80,6 +94,9 @@ export interface CSRGrant {
   endDate: string;
   makerName: string;
   approverName?: string;
+  principalInvestigator: ProjectMember;
+  team: ProjectMember[];
+  mou?: ProjectMoU;
   milestones: GrantMilestone[];
   auditTrail: AuditEntry[];
 }
