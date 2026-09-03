@@ -17,7 +17,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { donorDocuments } from "@/lib/donor-portal-actions";
+import { donorDocuments, donorMoU } from "@/lib/donor-portal-actions";
 import { formatDate, formatINR } from "@/lib/format";
 import { useStore } from "@/lib/store";
 
@@ -168,6 +168,7 @@ export default function DonorPortalPage() {
 
           {supportedGrants.map((grant) => {
             const completed = grant.milestones.filter((m) => m.status === "Disbursed").length;
+            const mou = donorMoU(grant);
             return (
               <Card key={grant.id}>
                 <CardHeader>
@@ -180,6 +181,23 @@ export default function DonorPortalPage() {
                   <p className="text-muted-foreground">
                     {grant.csrActSection} · {formatINR(grant.totalAmount)} committed
                   </p>
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <p className="text-muted-foreground">
+                      Led by {grant.principalInvestigator.name},{" "}
+                      {grant.principalInvestigator.department}
+                    </p>
+                    {mou && (
+                      <Button
+                        variant="outline"
+                        size="xs"
+                        className="gap-1"
+                        onClick={() => downloadTextFile(mou.fileName, mou.content)}
+                      >
+                        <Download className="size-3" />
+                        MoU
+                      </Button>
+                    )}
+                  </div>
                   {grant.milestones.length > 0 && (
                     <div className="space-y-1.5">
                       <p className="text-xs text-muted-foreground">

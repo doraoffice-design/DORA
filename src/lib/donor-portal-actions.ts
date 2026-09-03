@@ -1,3 +1,4 @@
+import { buildGrantMoU, grantMoUFileName } from "./csr-grants-actions";
 import { formatDate, formatINR } from "./format";
 import type { CSRGrant, Donor, EndowmentFund, GrantMilestone } from "./types";
 
@@ -44,6 +45,22 @@ function makeDocument(input: {
 }
 
 const FOOTER = ["", "Dean of Resources & Alumni Affairs (DORA), IIT Mandi"];
+
+// The signed MoU for a grant, as a downloadable document — null until the grant
+// is approved and the MoU is on file. Shared by the "Your documents" list and
+// the per-project card on the donor portal.
+export function donorMoU(grant: CSRGrant): DonorDocument | null {
+  if (!grant.mou) return null;
+  return {
+    id: `mou-${grant.id}`,
+    label: "Memorandum of Understanding",
+    detail: grant.grantTitle,
+    amount: grant.totalAmount,
+    issuedOn: grant.mou.signedDate,
+    fileName: grantMoUFileName(grant),
+    content: buildGrantMoU(grant),
+  };
+}
 
 export function buildUtilizationCertificate(grant: CSRGrant, milestone: GrantMilestone): string {
   return makeDocument({
@@ -125,26 +142,8 @@ function partnershipDocuments(
   }
 
   for (const grant of donorGrants) {
-    documents.push(
-      makeDocument({
-        id: `mou-${grant.id}`,
-        label: "Memorandum of Understanding",
-        detail: grant.grantTitle,
-        issuedOn: grant.startDate,
-        amount: grant.totalAmount,
-        lines: [
-          "MEMORANDUM OF UNDERSTANDING",
-          "",
-          `Project: ${grant.grantTitle}`,
-          `CSR Partner: ${grant.companyName}`,
-          `CSR Act Section: ${grant.csrActSection}`,
-          `Total Grant Value: ${formatINR(grant.totalAmount)}`,
-          `Term: ${formatDate(grant.startDate)} to ${formatDate(grant.endDate)}`,
-          `Milestones: ${grant.milestones.length}`,
-          ...FOOTER,
-        ],
-      }),
-    );
+    const mou = donorMoU(grant);
+    if (mou) documents.push(mou);
   }
 
   documents.push(
