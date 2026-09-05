@@ -75,7 +75,7 @@ export default function CSRGrantsPage() {
     toast.success("Grant submitted for approval", {
       description: `${grant.grantTitle} sent to Dean for review.`,
     });
-    router.push(`/dashboard/csr-grants/${grant.id}`);
+    router.push(`/staff/csr-grants/${grant.id}`);
   };
 
   return (
@@ -138,11 +138,11 @@ export default function CSRGrantsPage() {
                 <TableRow
                   key={grant.id}
                   className="cursor-pointer"
-                  onClick={() => router.push(`/dashboard/csr-grants/${grant.id}`)}
+                  onClick={() => router.push(`/staff/csr-grants/${grant.id}`)}
                 >
                   <TableCell>
                     <Link
-                      href={`/dashboard/csr-grants/${grant.id}`}
+                      href={`/staff/csr-grants/${grant.id}`}
                       className="font-medium hover:underline"
                       onClick={(e) => e.stopPropagation()}
                     >

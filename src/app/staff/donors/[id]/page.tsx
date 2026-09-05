@@ -44,7 +44,7 @@ function initials(name: string) {
     .toUpperCase();
 }
 
-export default function DonorDetailPage({ params }: PageProps<"/dashboard/donors/[id]">) {
+export default function DonorDetailPage({ params }: PageProps<"/staff/donors/[id]">) {
   const { id } = use(params);
   const { donors, setDonors, opportunities, currentUser } = useStore();
   const [open, setOpen] = useState(false);
@@ -128,7 +128,7 @@ export default function DonorDetailPage({ params }: PageProps<"/dashboard/donors
             {linkedOpportunities.map((o) => (
               <Link
                 key={o.id}
-                href="/dashboard/pipeline"
+                href="/staff/pipeline"
                 className="flex items-center justify-between rounded-md border p-3 text-sm hover:bg-accent"
               >
                 <div>

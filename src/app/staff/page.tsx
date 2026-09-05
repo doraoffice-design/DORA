@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useStore } from "@/lib/store";
 import { formatDate, formatINR } from "@/lib/format";
 
-export default function DashboardOverviewPage() {
+export default function StaffOverviewPage() {
   const { funds, grants, donors, opportunities } = useStore();
 
   const totalCorpus = funds.reduce((sum, f) => sum + f.currentBalance, 0);
@@ -66,7 +66,7 @@ export default function DashboardOverviewPage() {
             {grantsAwaitingApproval.map((g) => (
               <Link
                 key={g.id}
-                href={`/dashboard/csr-grants/${g.id}`}
+                href={`/staff/csr-grants/${g.id}`}
                 className="flex items-center justify-between rounded-md border p-3 text-sm hover:bg-accent"
               >
                 <div>
@@ -79,7 +79,7 @@ export default function DashboardOverviewPage() {
             {milestonesAwaitingReview.map(({ grant, milestone }) => (
               <Link
                 key={milestone.id}
-                href={`/dashboard/csr-grants/${grant.id}`}
+                href={`/staff/csr-grants/${grant.id}`}
                 className="flex items-center justify-between rounded-md border p-3 text-sm hover:bg-accent"
               >
                 <div>
@@ -107,7 +107,7 @@ export default function DashboardOverviewPage() {
               .map(({ donor, interaction }) => (
                 <Link
                   key={interaction.id}
-                  href={`/dashboard/donors/${donor.id}`}
+                  href={`/staff/donors/${donor.id}`}
                   className="flex items-start justify-between gap-3 rounded-md border p-3 text-sm hover:bg-accent"
                 >
                   <div>
@@ -128,7 +128,7 @@ export default function DashboardOverviewPage() {
         <CardHeader className="flex items-center justify-between">
           <CardTitle className="text-base">Fundraising pipeline snapshot</CardTitle>
           <Link
-            href="/dashboard/pipeline"
+            href="/staff/pipeline"
             className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
           >
             View board <ArrowUpRight className="size-3.5" />

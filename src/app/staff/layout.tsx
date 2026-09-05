@@ -1,7 +1,7 @@
 import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
-export default function DashboardLayout({ children }: LayoutProps<"/dashboard">) {
+export default function StaffLayout({ children }: LayoutProps<"/staff">) {
   return (
     <SidebarProvider>
       <AppSidebar />

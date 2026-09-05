@@ -26,14 +26,14 @@ import {
 import { useStore } from "@/lib/store";
 
 const partA = [
-  { title: "Overview", url: "/dashboard", icon: LayoutDashboard },
-  { title: "Endowment Funds", url: "/dashboard/endowment-funds", icon: Banknote },
-  { title: "CSR Grants & Milestones", url: "/dashboard/csr-grants", icon: HandCoins },
+  { title: "Overview", url: "/staff", icon: LayoutDashboard },
+  { title: "Endowment Funds", url: "/staff/endowment-funds", icon: Banknote },
+  { title: "CSR Grants & Milestones", url: "/staff/csr-grants", icon: HandCoins },
 ];
 
 const partB = [
-  { title: "Donor CRM", url: "/dashboard/donors", icon: Users },
-  { title: "Fundraising Pipeline", url: "/dashboard/pipeline", icon: TrendingUp },
+  { title: "Donor CRM", url: "/staff/donors", icon: Users },
+  { title: "Fundraising Pipeline", url: "/staff/pipeline", icon: TrendingUp },
 ];
 
 export function AppSidebar() {

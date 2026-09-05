@@ -66,7 +66,7 @@ export default function EndowmentFundsPage() {
     setFunds((prev) => [fund, ...prev]);
     setOpen(false);
     toast.success("Fund created", { description: `${fund.name} added as a draft record.` });
-    router.push(`/dashboard/endowment-funds/${fund.id}`);
+    router.push(`/staff/endowment-funds/${fund.id}`);
   };
 
   return (
@@ -128,11 +128,11 @@ export default function EndowmentFundsPage() {
                 <TableRow
                   key={fund.id}
                   className="cursor-pointer"
-                  onClick={() => router.push(`/dashboard/endowment-funds/${fund.id}`)}
+                  onClick={() => router.push(`/staff/endowment-funds/${fund.id}`)}
                 >
                   <TableCell>
                     <Link
-                      href={`/dashboard/endowment-funds/${fund.id}`}
+                      href={`/staff/endowment-funds/${fund.id}`}
                       className="font-medium hover:underline"
                       onClick={(e) => e.stopPropagation()}
                     >

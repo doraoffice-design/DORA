@@ -73,7 +73,7 @@ export default function DonorsPage() {
     setDonors((prev) => [donor, ...prev]);
     setOpen(false);
     toast.success("Donor added", { description: `${donor.name} added to the CRM.` });
-    router.push(`/dashboard/donors/${donor.id}`);
+    router.push(`/staff/donors/${donor.id}`);
   };
 
   return (
@@ -136,7 +136,7 @@ export default function DonorsPage() {
                 <TableRow
                   key={donor.id}
                   className="cursor-pointer"
-                  onClick={() => router.push(`/dashboard/donors/${donor.id}`)}
+                  onClick={() => router.push(`/staff/donors/${donor.id}`)}
                 >
                   <TableCell>
                     <div className="flex items-center gap-2.5">
@@ -145,7 +145,7 @@ export default function DonorsPage() {
                       </Avatar>
                       <div>
                         <Link
-                          href={`/dashboard/donors/${donor.id}`}
+                          href={`/staff/donors/${donor.id}`}
                           className="font-medium hover:underline"
                           onClick={(e) => e.stopPropagation()}
                         >

@@ -56,7 +56,7 @@ function downloadTextFile(fileName: string, content: string) {
   URL.revokeObjectURL(url);
 }
 
-export default function GrantDetailPage({ params }: PageProps<"/dashboard/csr-grants/[id]">) {
+export default function GrantDetailPage({ params }: PageProps<"/staff/csr-grants/[id]">) {
   const { id } = use(params);
   const { grants, setGrants, currentUser } = useStore();
   const [rejectTarget, setRejectTarget] = useState<{ kind: "grant" | "milestone"; milestoneId?: string } | null>(

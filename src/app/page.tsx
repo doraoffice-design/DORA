@@ -45,7 +45,7 @@ export default function PublicHomePage() {
               size="sm"
               className="gap-1.5"
               nativeButton={false}
-              render={<Link href="/dashboard" />}
+              render={<Link href="/staff" />}
             >
               Staff Portal
               <ArrowRight className="size-3.5" />

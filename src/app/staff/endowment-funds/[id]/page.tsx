@@ -36,7 +36,7 @@ import {
 } from "@/lib/endowment-funds-actions";
 import { useStore } from "@/lib/store";
 
-export default function FundDetailPage({ params }: PageProps<"/dashboard/endowment-funds/[id]">) {
+export default function FundDetailPage({ params }: PageProps<"/staff/endowment-funds/[id]">) {
   const { id } = use(params);
   const { funds, setFunds, currentUser } = useStore();
   const [open, setOpen] = useState(false);
