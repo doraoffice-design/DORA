@@ -1,0 +1,489 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage{ragged2e}
+\usepackage{lastpage}
+\usepackage{xcolor}
+
+\hypersetup{colorlinks=true, linkcolor=blue!40!black, urlcolor=blue!40!black}
+
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{0.6em}{}
+\titlespacing*{\section}{0pt}{18pt}{8pt}
+\titlespacing*{\subsection}{0pt}{12pt}{5pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhead[L]{\small DORA Resource Management Portal (DRMP)}
+\fancyhead[R]{\small Dean's Office (DORA)}
+\fancyfoot[C]{\small\thepage}
+
+\newcolumntype{P}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.15}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+% ---------------- TITLE PAGE ----------------
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{center}
+\vspace*{1.0cm}
+{\large\bfseries IIT Mandi}\\[4pt]
+{\normalsize Dean's Office of Resource Generation and Alumni Relations (DORA)}\\[1.8cm]
+{\Large\bfseries Project Proposal and Working Agreement}\\[10pt]
+{\huge\bfseries DORA Resource Management Portal}\\[6pt]
+{\Large\bfseries (DRMP)}\\[10pt]
+{\large\bfseries A Phased Platform for Resource Generation, Donor Relationship\\ Management, and Endowment, CSR \& Scholarship Governance}\\[1.2cm]
+\rule{0.85\textwidth}{0.4pt}\\[10pt]
+{\normalsize A proposal submitted for consideration and approval by the\\ Dean's Office of Resource Generation and Alumni Relations (DORA), IIT Mandi}\\[10pt]
+\rule{0.85\textwidth}{0.4pt}
+\vspace{1.2cm}
+
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{Submitted by:}\\[4pt]
+Student Development Team\\
+(Team of 4 Students)\\[6pt]
+1. Sachit Bansal (B24350), Team Lead\\[4pt]
+2. Harshit Anand (B24128)\\[4pt]
+3. Jayjit Singh (B24131)\\[4pt]
+4. Jashnoor Singh (B24337)
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{Submitted to:}\\[4pt]
+Dean's Office of Resource Generation\\
+and Alumni Relations (DORA)\\
+{}IIT Mandi\\[6pt]
+\textbf{Date:} \today
+\end{minipage}
+
+\vfill
+{\small This document constitutes a proposal and, upon signature by both parties, a working agreement governing scope of work, deliverables, acceptance criteria, timelines, reporting, and compensation for the project described herein.}
+\end{center}
+\end{titlepage}
+
+\tableofcontents
+\clearpage
+
+% ---------------- SECTION 1 ----------------
+\section{Introduction and Project Overview}
+The endowment, CSR (Corporate Social Responsibility) grant, scholarship disbursement, and donor/resource-generation activities currently administered by the Dean's Office of Resource Generation and Alumni Relations (hereinafter ``DORA'' or ``the Institution'') are, as of today, tracked entirely manually through spreadsheets, documents, and paper records, which makes them time-consuming, error-prone, and difficult to audit as the number of endowed funds, corporate grants, scholarship applicants, and donor relationships grows. An informally-built prototype was created earlier only to illustrate the intended look and feel of such a platform, and has not been used to track any actual data. This document proposes the design and phased, iterative development of a web-based platform, to be named the \textbf{DORA Resource Management Portal} (``DRMP''/``the Platform''), by a team of four (4) students (``the Development Team''/``the Team'') under the guidance of DORA.
+
+Following DORA's review of an earlier draft, the Platform's development is structured into three phases (Section~\ref{sec:scope}):
+\begin{enumerate}[leftmargin=1.6em, itemsep=3pt]
+\item \textbf{Phase I (MVP) --- Resource Generation:} a donor/partner CRM, fundraising pipeline tracking, a proposal repository, an approval-gated donor email and outreach module, follow-up reminders, and a resource-generation dashboard.
+\item \textbf{Phase II --- Governance, Compliance and Reporting:} endowment fund management, CSR grant and milestone tracking, scholarship application and disbursement, maker-checker approval controls, audit logging, donor-wise and governance reporting, automated compliance alerts, and templated document generation.
+\item \textbf{Phase III --- Advanced Institutional Integrations:} integration with the Institution's Finance/ERP systems, institutional SSO, document automation, and other advanced integrations, to be undertaken once separately commissioned.
+\end{enumerate}
+
+While the idea is simple to state, the underlying logic across all three phases involves substantial rule-based and workflow complexity, so the Platform is best understood as a configurable governance-and-relationship-management engine coupled with a staff- and leadership-facing web application, not a simple form tool. This document also serves as a working agreement defining scope, deliverables and acceptance criteria, reporting, and compensation for the Development Team, subject throughout to the approvals described in Section~\ref{sec:iterative} and Section~\ref{sec:compensation}. Phase I is intended, upon signature, to be the final and precise scope and working agreement for that phase; Phase II and Phase III remain indicative and subject to separate commissioning.
+
+% ---------------- SECTION 2 ----------------
+\section{Scope of Work}
+\label{sec:scope}
+The scope below reflects the current understanding of requirements, organized by phase. As described in Section~\ref{sec:iterative}, Phase I is to be frozen and built first; Phase II and Phase III items are documented now for planning purposes but are not commissioned until DORA and the Competent Authority separately approve them.
+
+\subsection*{Part I --- Phase I (MVP): Resource Generation}
+\addcontentsline{toc}{subsection}{Part I --- Phase I (MVP): Resource Generation}
+
+\subsection{Donor and Partner Database (CRM)}
+\label{sec:crm}
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item A comprehensive, searchable database of donors and prospective partners, covering individual donors, alumni, companies, foundations, PSUs (public sector undertakings), and other prospective partners.
+\item Per-record profile: contact details, category/type, relationship owner (the DORA staff member managing the relationship), donor interests/areas of giving interest, source of lead (e.g., referral, event, alumni network, inbound enquiry), and free-text notes.
+\item Relationship-management fields maintained per donor: current engagement stage (e.g., Prospect / Engaged / Solicited / Committed / Active Donor / Lapsed), date and summary of the last interaction, next action and its due date, contribution history, repeat-donor status (derived from contribution history), and links to the donor's associated pipeline opportunities (Section~\ref{sec:pipeline}) and proposals (Section~\ref{sec:proposals}).
+\item Only data provided by DORA or entered manually by DORA staff shall populate the CRM; the Platform shall not scrape, purchase, or import third-party contact databases (see Section~\ref{sec:oos}).
+\end{itemize}
+
+\subsection{Fundraising Pipeline Tracking}
+\label{sec:pipeline}
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item A pipeline/stage tracker covering the complete fundraising lifecycle: lead identification, meetings/engagement, proposal submission, sanction, and receipt of funds.
+\item Each opportunity is linked to a donor/partner record (Section~\ref{sec:crm}) and shows its current stage, expected/committed amount, and next action.
+\item Stage-change history, so DORA can see how long an opportunity has spent at each stage. This history also feeds the pipeline-value, opportunity-ageing, and conversion-rate metrics in Section~\ref{sec:dashboard1}.
+\end{itemize}
+
+\subsection{Proposal Repository}
+\label{sec:proposals}
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item A repository of DORA's fundraising proposals (by theme, fund category, or programme), that DORA staff can browse and select from.
+\item Ability to attach a selected, approved proposal to an outreach communication (Section~\ref{sec:email}) or a pipeline opportunity.
+\end{itemize}
+
+\subsection{Donor Email and Outreach Module}
+\label{sec:email}
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item Ability for authorised DORA staff to draft emails to selected donors from the authorised DORA email account, and to attach approved proposals or other documents (Section~\ref{sec:proposals}).
+\item \textbf{A complete donor communication trail is maintained for every email}: its draft, its approval status, its sent status, any reply received, follow-up status, and all attachments, all visible against the corresponding donor record.
+\item \textbf{External emails shall be sent only after review and approval by the authorised DORA user.} A drafted email is held in a pending state, visible to the approver, until explicitly approved; only the approver's action triggers the actual send. This approval gate applies to every outgoing external communication without exception, and is a hard constraint (Section~\ref{sec:oos}), not a configurable default.
+\end{itemize}
+
+\subsection{Follow-up Reminders}
+\label{sec:followup}
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item Automated reminders/follow-up flags for donor communications that are awaiting a reply, or that otherwise require a next action, surfaced to the relevant Fundraising Officer.
+\item Follow-up status (e.g., no reply yet, reply received, next action scheduled) is tracked per communication and rolled up per donor and per pipeline opportunity.
+\end{itemize}
+
+\subsection{Resource-Generation Dashboard}
+\label{sec:dashboard1}
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item Funds generated, committed versus received funds, and pipeline value, over a selectable time range.
+\item Proposals submitted, and success/conversion rate (proposals submitted versus sanctioned).
+\item Donor-wise contribution totals, identification of repeat donors, and active fundraising opportunities by stage with pending follow-ups.
+\item Opportunity ageing: time spent by each pipeline opportunity in its current stage, to surface stalled opportunities requiring follow-up.
+\item FY-wise (financial-year-wise) and donor-category-wise (CSR/corporate, philanthropy, alumni, PSU, foundation) trend views, so DORA can see which categories and financial years are driving resource generation.
+\end{itemize}
+
+\subsection*{Part II --- Phase II: Governance, Compliance and Reporting}
+\addcontentsline{toc}{subsection}{Part II --- Phase II: Governance, Compliance and Reporting}
+
+\subsection{Endowment Fund Master Data Management}
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item Admin interface to manage endowment fund records: adding a new fund, setting its donor name, category (Academic Chair / Student Financial Aid / Research Support / Capital Infrastructure / Special Initiative), principal corpus amount, year established, and annual yield rate.
+\item The Platform shall separately record and distinguish, for every fund and every year: the \textbf{estimated/projected yield} (computed from the configured yield rate, an assumption) and the \textbf{actual interest received} (as per bank/investment statements, entered or reconciled by the Endowment Officer). Utilization and dashboard reporting shall clearly label which figure is a projection and which is actual, and shall not conflate the two.
+\item Ability for the admin to export fund data in a structured format (CSV/Excel) for offline institutional and audit records.
+\item Admin-defined mapping of annual yield allocation against each fund's category. This mapping forms the base ruleset used for the utilization reporting in Section~\ref{sec:audit}.
+\end{itemize}
+
+\subsection{CSR Grant and Milestone Tracking Engine}
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item Grant lifecycle logic driven by rules configured by the admin (DORA) rather than hard-coded values, since the Platform serves grants from multiple corporate donors with differing milestone structures, not a single fixed template.
+\item Grant record management: corporate donor name, sanctioned amount, Principal Investigator (name and department), start date, end date, and status (Ongoing / Completed / Lapsed).
+\item Milestone sub-records per grant: description, due date, amount, completion status, and a linked Utilization Certificate (UC) status (Pending / Submitted / Verified), since milestone-linked fund release is central to CSR compliance.
+\item UC document upload per milestone, viewable by Finance and auditors.
+\item Overdue milestone flagging: any milestone past its due date and not marked complete is automatically flagged for admin follow-up.
+\item Fund utilization figures (spent versus sanctioned) are automatically rolled up per grant and per corporate donor for the governance reporting in Section~\ref{sec:reporting2}.
+\end{itemize}
+
+\subsection{Scholarship Scheme and Applicant Management}
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item A scheme configuration form where the admin defines, per scholarship scheme, the donor, eligibility rule (minimum CGPA, maximum family income, percentage of tuition covered), and annual budget.
+\item Applicant intake capturing student name, roll number, department, GPA, family annual income, requested/awarded amount, and supporting document references (income certificate, marksheet).
+\item Eligibility check against the configured scheme rules at the point of application entry, flagging any applicant who does not meet the criteria.
+\item \textbf{Selection of eligible applicants shall follow the scheme's specific approved selection criteria} (e.g., ranking by CGPA, need, or a weighted formula defined by the donor/scheme), and not merely the order in which applications were submitted. The Platform shall allow the reviewer to compare and rank all eligible applicants for a scheme before any approval decision is made.
+\item Award amount tracked against the scheme's annual budget, with a running utilization balance.
+\end{itemize}
+
+\subsection{Disbursement Approval and Fund Release Workflow}
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item A staff-facing workflow allowing a Scholarship Officer or CSR/Grants Officer to raise a disbursement or milestone-payout request.
+\item \textbf{Approval and disbursement are treated as two distinct, sequential stages of the workflow, each independently recorded with its own actor and timestamp.} Marking a request ``Approved'' does not itself release funds; a separate ``Disburse'' action, taken after approval, is required to complete the transaction and is logged separately.
+\item Approval workflow through which the Dean (or a delegated approver) reviews and approves or rejects the request, with a mandatory reason field for any rejection.
+\item Automatic update of budget and utilization records upon disbursement, with notification to the requesting officer and Finance.
+\item Maker-checker control enforced on the server: the staff member who raises a request cannot be the same login that approves it, and the approver cannot be the same login that marks it disbursed.
+\end{itemize}
+
+\subsection{Audit Log and Financial Change Tracking}
+\label{sec:audit}
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item Recording of every create, edit, approve, reject, and disburse action across all modules, including amount, reason (where applicable), actor, and timestamp.
+\item Automated notification to relevant staff and Finance when a disbursement is approved, or when a milestone becomes overdue.
+\item Admin/auditor interface to filter, search, and export the audit log for compliance review.
+\end{itemize}
+
+\subsection{Administrative Review, Approval, and Delegation Workflow}
+\label{sec:admin-review}
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item Before any disbursement (scholarship or CSR milestone payout) is treated as final, the DORA administration reviews the request generated by the Platform.
+\item Upon approval, the Platform notifies/forwards the finalized disbursement record to Finance, by email and/or a dedicated portal view.
+\end{itemize}
+
+\subsection{Donor-wise and Governance Reporting}
+\label{sec:reporting2}
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item Donor-wise reports covering: corpus/endowment statements, annual utilization (distinguishing estimated yield from actual interest received), recipient details (which students/projects benefited), Utilization Certificates, MoUs (Memoranda of Understanding), sanction letters, and other compliance documents.
+\item A governance dashboard showing endowment, CSR, and scholarship metrics (corpus, utilization percentage, disbursement percentage) alongside the Phase I resource-generation dashboard (Section~\ref{sec:dashboard1}), for a single leadership-facing view once Phase II is delivered.
+\item Document storage and retrieval per donor, so DORA can produce a complete compliance packet for any donor on request.
+\end{itemize}
+
+\subsection{Automated Alerts}
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item Automated alerts for: pending Utilization Certificates, pending compliance reports, MoU expiries, upcoming/overdue scholarship disbursements, and donor commitments not yet fulfilled.
+\item Alerts are surfaced both within the Platform and by email, to the relevant role (Section~\ref{sec:roles}).
+\end{itemize}
+
+\subsection{Document Generation}
+\label{sec:docgen}
+Using approved/available DORA templates (the Team implements template-driven generation; DORA provides the templates and letterhead content), the Platform shall generate:
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item Donor acknowledgement letters (Phase I, generated from CRM and pipeline data once a contribution is recorded).
+\item Corpus/endowment statements and scholarship sanction/award letters (Phase II).
+\item Utilization-Certificate-related templates, annual reports, and other management reports drawing on both resource-generation and governance data (Phase II).
+\end{itemize}
+
+\subsection*{Part III --- Phase III: Advanced Institutional Integrations (Future)}
+\addcontentsline{toc}{subsection}{Part III --- Phase III: Advanced Institutional Integrations (Future)}
+
+\subsection{Finance/ERP Integration}
+Integration with the Institution's central Finance/ERP or academic systems, for reconciliation or data exchange, to be scoped and undertaken only once explicitly commissioned, with access provided by the Institution.
+
+\subsection{Institutional SSO Integration}
+\label{sec:sso}
+Integration with the Institution's SSO/Google Workspace login for staff authentication. By default, Phase I and Phase II shall use application-level (email/password) login, with institutional SSO deferred to Phase III. However, the Team shall evaluate, in consultation with DORA and IT Services, whether institutional SSO can be introduced earlier, during Phase I or Phase II, in place of application-level login; if found feasible without a material effect on the Phase I financial ceiling, timeline, or architecture, it may be brought forward, subject to the prior written approval described in Section~\ref{sec:iterative}.
+
+\subsection{Document Automation and Other Advanced Integrations}
+Further document automation (e.g., e-signature workflows, automated data extraction from submitted UCs), payment gateway integration for disbursement execution, and any other advanced institutional integration identified during Phase I/II, all to be scoped separately when this phase is commissioned.
+
+\subsection*{Part IV --- Cross-Cutting Requirements}
+\addcontentsline{toc}{subsection}{Part IV --- Cross-Cutting Requirements}
+
+\subsection{Roles and Access Control}
+\label{sec:roles}
+The Platform will support role-based access as follows:
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item \textbf{Endowment Officer:} add/edit funds, including reconciling actual interest received; view all modules read-only.
+\item \textbf{CSR/Grants Officer:} add/edit grants and milestones; upload UCs; cannot approve their own milestone payouts.
+\item \textbf{Scholarship Officer:} log applicants; initiate approval requests; cannot approve or disburse their own requests.
+\item \textbf{Resource Generation/Fundraising Officer:} manage the donor/partner database, fundraising pipeline, and proposal repository; draft (but not send) donor emails.
+\item \textbf{Dean/Approver:} approve or reject disbursements; approve outgoing donor emails before send; view all dashboards; cannot directly edit historical fund or grant records.
+\item \textbf{Finance:} view all financial data; execute/record disbursements after approval; export reports; reconcile receipts; cannot approve applications.
+\item \textbf{Auditor:} read-only access to all records, audit log, UC documents, MoUs, and donor reports; the only role with no create, edit, or approve permission anywhere in the system.
+\end{itemize}
+
+\subsection{Data and System Inputs Required from Administration}
+To build and operate the Platform, the Development Team will require the following from DORA/the Institution:
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item \textbf{Donor and partner data (Phase I):} existing donor/alumni/company/foundation/PSU contact records, past giving history, and any existing MoUs or sanction letters, for CRM seeding.
+\item \textbf{Proposal repository seed content (Phase I):} existing DORA proposal documents, and the approved templates referred to in Section~\ref{sec:docgen}.
+\item \textbf{Authorised email account access (Phase I):} access to, or a delegated send-permission on, the authorised DORA email account, for the outreach module.
+\item \textbf{Endowment, CSR, and scholarship data (Phase II):} existing fund list, corpus figures, yield rates, grant records, milestone schedules, UCs already on file, scheme definitions, and applicant/disbursement history, as available, ahead of Phase II commencing.
+\item \textbf{Login/authentication:} for Phase I and II, DORA staff will use application-level login unless institutional SSO is brought forward per Section~\ref{sec:sso}.
+\item \textbf{Infrastructure support:} guidance on hosting, server, and cloud backup requirements. Where specialized support is needed, the administration will direct the Team to the concerned person/department (e.g., IT Services).
+\item Additional data, access, or system inputs may be required as later phases are commissioned; these will be requested from DORA as and when identified.
+\end{itemize}
+
+\textbf{Confidentiality of institutional data.} All data shared by DORA/the Institution for the purposes of building and operating the Platform, including but not limited to donor and alumni information, corpus and financial figures, student personal and financial data, Utilization Certificates, MoUs, sanction letters, and donor communication history, is proprietary and confidential to the Institution. The Development Team shall not share, disclose, publish, or use this data outside the scope of this engagement, and shall not share it with any third party, under any circumstance, without the Institution's prior written consent.
+
+\subsection{Out of Scope and Boundaries}
+\label{sec:oos}
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item Purchase, scraping, or import of third-party donor/contact databases; the CRM (Section~\ref{sec:crm}) is populated only from data DORA provides or DORA staff enter. This is a hard constraint.
+\item Sending of any external communication without prior approval by an authorised DORA user (Section~\ref{sec:email}). This is a hard constraint, not a configurable default.
+\item Any change that materially affects person-hours, cost, timeline, system architecture, security, infrastructure, or functionality relative to this proposal (a \textbf{material change}) requires the prior written approval of DORA and, wherever applicable under IIT Mandi rules, the Competent Authority (Section~\ref{sec:iterative}), before any work on it begins. This proposal does not, by itself, authorize work or expenditure beyond the Phase I scope and the financial ceiling defined in Section~\ref{sec:ceiling}.
+\end{itemize}
+
+% ---------------- SECTION 3 (NEW) ----------------
+\section{Phase I Deliverables and Acceptance Criteria}
+\label{sec:deliverables}
+Phase I shall be considered successfully completed, and eligible for formal acceptance and handover, upon satisfaction of all of the following:
+
+\begin{itemize}[leftmargin=1.4em, itemsep=4pt]
+\item \textbf{Working Platform:} a deployed, functioning web-based Platform implementing all Phase I modules described in Part I of Section~\ref{sec:scope} --- the donor/partner CRM (Section~\ref{sec:crm}), fundraising pipeline tracking (Section~\ref{sec:pipeline}), proposal repository (Section~\ref{sec:proposals}), approval-controlled donor email and outreach module (Section~\ref{sec:email}), follow-up reminder mechanism (Section~\ref{sec:followup}), and resource-generation dashboard (Section~\ref{sec:dashboard1}).
+\item \textbf{Approval controls verified:} demonstrated, working enforcement of the donor-email approval gate (Section~\ref{sec:email}) and of role-based access restrictions applicable within Phase I (Section~\ref{sec:roles}).
+\item \textbf{Security baseline met:} the Phase I deployment satisfies the security requirements in Section~\ref{sec:security}, including that no production credentials are stored in the source repository.
+\item \textbf{Documentation delivered:} deployment documentation, administrator manual, user manual, and database/API documentation, per Section~\ref{sec:docs}.
+\item \textbf{Third-party component inventory delivered:} the licensing inventory described in Section~\ref{sec:licensing}, current as of handover.
+\item \textbf{Source code and repository handover:} the complete, working Phase I source code merged into the production branch of the GitHub repository under DORA/IIT Mandi's administrative control (Section~\ref{sec:ip}), with no outstanding unmerged critical functionality.
+\item \textbf{Deployment:} the Platform deployed to an environment approved by DORA/IT Services, and accessible to designated DORA users.
+\item \textbf{Backup and recovery procedure:} a documented, and at least once-tested, backup and recovery procedure for the production database (Section~\ref{sec:security}).
+\item \textbf{User Acceptance Testing (UAT):} successful completion of a UAT round conducted by designated DORA staff against the modules listed above, with all critical and high-priority defects identified during UAT resolved prior to final sign-off; minor/cosmetic issues may, with DORA's agreement, be deferred to the post-deployment support period (Section~\ref{sec:docs}).
+\end{itemize}
+
+Formal acceptance of Phase I shall be recorded in writing (Section~\ref{sec:comm-doc}) by a designated DORA official. This written acceptance is the trigger event for (a) finalizing Phase I compensation within the ceiling described in Section~\ref{sec:ceiling}, and (b) commencement of the post-deployment support period described in Section~\ref{sec:docs}.
+
+% ---------------- SECTION 4 ----------------
+\section{Development Approach}
+
+\subsection{Phased and Iterative Development}
+\label{sec:iterative}
+A complete, final system architecture for all three phases cannot be reasonably fixed at the outset given the complexity in Section~\ref{sec:scope}. Development therefore proceeds phase by phase: Phase I (MVP) is built first; Phase II begins only once Phase I is substantially complete and reviewed by DORA; Phase III items are undertaken only once separately commissioned. Within a phase, work proceeds iteratively (build, demo to DORA, incorporate feedback), and any new requirement raised within the currently commissioned phase is assessed for feasibility and, if accepted, added to that phase's working scope, subject to the financial ceiling in Section~\ref{sec:ceiling}.
+
+Any request to bring forward Phase II/III work, or any other change that materially affects person-hours, cost, timeline, system architecture, security, infrastructure, or functionality relative to this proposal (a \textbf{material change}), requires DORA's and, wherever applicable under IIT Mandi rules, the Competent Authority's prior written approval, documented per Section~\ref{sec:comm-doc}, before the Team begins that work. This proposal does not create an open-ended commitment on either side, financial or otherwise, and does not by itself authorize expenditure beyond the Phase I financial ceiling in Section~\ref{sec:ceiling}.
+
+Once Phase I scope is clearly frozen following DORA's review, the Team may proceed with Phase I implementation without waiting for every feature of Phase II or Phase III to be fully defined.
+
+\subsection{Version Control and Work Tracking}
+\label{sec:version-control}
+All source code will be maintained in a dedicated GitHub repository under IIT Mandi/DORA's administrative control from the commencement of the project (Section~\ref{sec:ip}), and all work will be tracked and submitted via GitHub Pull Requests (PRs), which serve as the primary record of individual contribution.
+
+% ---------------- SECTION 5 ----------------
+\section{Team Structure}
+The Development Team consists of four (4) students of IIT Mandi, listed below:
+
+\begin{enumerate}[leftmargin=1.8em, itemsep=4pt]
+\item Sachit Bansal, B24350 (Team Lead / Point of Contact)
+\item Harshit Anand, B24128
+\item Jayjit Singh, B24131
+\item Jashnoor Singh, B24337
+\end{enumerate}
+
+Sachit Bansal shall serve as Team Lead and primary point of contact with DORA for scheduling meetings, consolidating weekly reports, and coordinating delivery.
+
+% ---------------- SECTION 6 ----------------
+\section{Reporting, Review, and Communication}
+
+\subsection{Weekly Progress Reports}
+The Development Team shall submit one (1) written progress report per week, summarizing work completed, work in progress, and blockers, attributed by individual member and referencing the corresponding GitHub Pull Requests (Section~\ref{sec:version-control}).
+
+\subsection{Weekly Review Meeting}
+A regular weekly review shall be held between the Development Team and designated DORA officials to review progress and gather inputs, with additional short meetings scheduled as needed whenever requirements need clarification.
+
+\subsection{Telegram Coordination Group}
+A Telegram group shall be maintained between the Development Team and designated DORA officials for routine, day-to-day coordination. Important decisions, approvals, and any change in scope shall, however, continue to be recorded through official email (Section~\ref{sec:comm-doc}); Telegram communication is for coordination convenience only and does not substitute for the official record.
+
+\subsection{Administrative Review and Delegation}
+As described in Section~\ref{sec:admin-review}, disbursement results are forwarded to Finance only after DORA review and approval, and outgoing donor emails are sent only after DORA approval (Section~\ref{sec:email}).
+
+\subsection{Documentation of Communication}
+\label{sec:comm-doc}
+All key communication and decisions exchanged between the Team and DORA, including outcomes of meetings and any approvals under Section~\ref{sec:iterative}, Section~\ref{sec:compensation}, or Section~\ref{sec:oos}, shall be documented over official email, serving as minutes of meeting (MoM) and the authoritative record for this engagement.
+
+% ---------------- SECTION 7 ----------------
+\section{Compensation and Payment Terms}
+\label{sec:compensation}
+The remuneration, financial ceiling, tool/subscription support, and any additional-hours or scope-expansion compensation described in this section are proposed terms only, subject to separate approval under applicable IIT Mandi rules and the approval of the Competent Authority. This proposal does not, by itself, create an open-ended or guaranteed financial commitment on the part of the Institution, and no compensation is payable beyond the ceiling in Section~\ref{sec:ceiling} without further written approval.
+
+\subsection{Phase I Financial Ceiling and Person-Hours Estimate}
+\label{sec:ceiling}
+Phase I is planned to run from September 2026 to the target handover date of 1 December 2026 (Section~\ref{sec:duration}), a working window of approximately three months, set against three planned phases overall (Section~\ref{sec:scope}). On an approximate, planning-only basis of one phase per month, and an average, non-mandatory benchmark of 25 hours per Team member per week (i.e., approximately 100 hours per member, or 400 hours across the four-member Team, per month), Phase I --- being the first phase, and expected to take proportionately longer than Phase II/III as it establishes shared infrastructure and the working relationship with DORA --- is subject to a proposed ceiling of \textbf{500 person-hours} in aggregate across the four-member Development Team, corresponding to a maximum indicative financial outlay of \textbf{Rs.~1,35,000} (500 hours $\times$ Rs.~270/hour), exclusive of any tools/subscription support under Section~\ref{sec:tools}. This ceiling, and the Rs.~270/hour rate itself, are proposed figures subject to the approval of the Competent Authority and applicable IIT Mandi rules; no compensation beyond this ceiling shall be payable without a further written approval explicitly extending it.
+
+The table below gives an indicative, module-wise breakdown of this estimate for planning purposes.
+
+\begin{center}
+\begin{tabular}{@{}p{9.5cm}r@{}}
+\toprule
+\textbf{Module} & \textbf{Indicative Person-Hours} \\
+\midrule
+Auth, roles, audit-log core \& shared platform infrastructure & 70 \\
+Donor and Partner CRM (Section~\ref{sec:crm}) & 70 \\
+Fundraising Pipeline Tracking (Section~\ref{sec:pipeline}) & 55 \\
+Proposal Repository (Section~\ref{sec:proposals}) & 40 \\
+Donor Email and Outreach, incl.\ approval workflow (Section~\ref{sec:email}) & 70 \\
+Follow-up Reminders (Section~\ref{sec:followup}) & 25 \\
+Resource-Generation Dashboard (Section~\ref{sec:dashboard1}) & 60 \\
+Testing, UAT support, and bug-fixing (Section~\ref{sec:deliverables}) & 45 \\
+Documentation and deployment (Section~\ref{sec:docs}) & 40 \\
+Project coordination, meetings, and reviews & 25 \\
+\midrule
+\textbf{Total} & \textbf{500} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Actual hours may be reallocated between the modules listed above as work progresses, provided the aggregate ceiling of 500 person-hours is not exceeded. Any request to exceed the aggregate ceiling itself is a material change under Section~\ref{sec:iterative} and requires prior written approval before further work is undertaken or claimed.
+
+\subsection{Stipend}
+Each member of the Development Team shall be compensated at a proposed rate of Rs.~270 per hour of documented, verifiable work, within the Phase I financial ceiling in Section~\ref{sec:ceiling}, subject to the approval of the Competent Authority and applicable IIT Mandi rules.
+
+\subsection{Tools, Software and Subscriptions}
+\label{sec:tools}
+Any software, cloud, AI/LLM, API, or other development-tool subscription required for the project (for example, but not limited to, an AI-assisted coding tool such as Claude Code) may be provided or reimbursed by the Institution, but only with prior approval and subject to applicable IIT Mandi rules. No such subscription is an automatic entitlement under this agreement; any resulting cost shall count toward, or be separately approved outside of, the financial ceiling in Section~\ref{sec:ceiling}, as determined by the Competent Authority.
+
+\subsection{Payment Schedule}
+Compensation shall be calculated and disbursed on a monthly basis. Payment for hours worked in a given calendar month shall be released during the first week of the following month, subject to submission and administrative acceptance of that month's weekly reports. Cumulative payments across the engagement shall not cause total Phase I compensation to exceed the ceiling in Section~\ref{sec:ceiling} without the further approval described therein.
+
+\subsection{Additional Hours and Scope Expansion}
+Any additional hours arising from an approved material change in scope (Section~\ref{sec:iterative}), or from work on Phase II/III once separately commissioned, shall be compensated only after the prior written approval referred to at the start of this section, and shall be subject to a separately approved financial ceiling covering that additional scope. No additional hours, scope expansion, or expenditure beyond the ceiling in Section~\ref{sec:ceiling} shall be assumed, claimed, or worked upon in advance of such approval.
+
+\subsection{Integrity of Hours and Basis for Payment}
+Payment in a given month is contingent on submission of that month's weekly reports and verifiable work reflected through GitHub activity (Section~\ref{sec:version-control}). The Development Team commits to logging hours with utmost sincerity and honesty; no inflated, false, or unworked hours shall be claimed for compensation.
+
+% ---------------- SECTION 8 ----------------
+\section{Intellectual Property, Ownership and Third-Party Components}
+\label{sec:ip}
+
+\subsection{Ownership of Work Product and Repository Control}
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item All source code, documentation, designs, donor/CRM data, and other work products created or populated by the Development Team under this engagement shall be the property of the Institution, subject to applicable institutional policy on student-developed intellectual property.
+\item The production GitHub repository shall be created under, and administrative access to it shall be under the control of, an IIT Mandi/DORA-owned GitHub organisation or account \textbf{from the commencement of the project}, not merely upon project completion. DORA shall retain administrative (owner-level) access to the repository throughout the development period, in addition to access held by the Development Team. All deployment credentials and production infrastructure access shall likewise be under IIT Mandi's control at all times. This includes full institutional ownership of the underlying data and codebase, not merely a license to use the Platform.
+\item The Development Team shall be permitted to reference this project as part of their academic or professional portfolio, subject to prior written consent of DORA regarding the extent of disclosure, and excluding any confidential donor, financial, or student data.
+\end{itemize}
+
+\subsection{Third-Party Components and Licensing}
+\label{sec:licensing}
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item The Development Team shall maintain an up-to-date inventory of all third-party and open-source libraries, frameworks, APIs, and other software components used in the Platform, together with their respective licenses, maintained in the repository and shared with DORA as part of the documentation described in Section~\ref{sec:docs}.
+\item No third-party or open-source component whose license would restrict IIT Mandi's ownership of, or ability to freely deploy, host, or modify, the Platform (e.g., certain copyleft or non-commercial-use licenses) shall be used without the Competent Authority's prior written approval.
+\item Any paid third-party service, library, or API used in the Platform shall be identified in this inventory and, where it carries a recurring cost, is subject to the approval described in Section~\ref{sec:tools}.
+\end{itemize}
+
+% ---------------- SECTION 9 ----------------
+\section{Data Privacy, Security and Confidentiality}
+\label{sec:privacy}
+
+\subsection{Data Privacy and Confidentiality}
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item The Platform will process sensitive data related to institutional endowment finances, corporate and individual donor relationships and communications, and student personal and financial records (scholarship applications).
+\item Wherever practicable, development and testing shall use dummy or masked data instead of real donor, alumni, or student records, to minimize exposure of sensitive institutional data during the build process.
+\item Access to production data, including the donor CRM and email communication history, shall be limited to what is strictly necessary for development, testing, and debugging, and shall follow any data protection guidelines issued by the Institution, with role-based access enforced throughout (Section~\ref{sec:roles}).
+\item Regular backups of production data shall be maintained as part of the Platform's operation, per the security requirements in Section~\ref{sec:security} and the documentation deliverables in Section~\ref{sec:docs}.
+\item The Development Team shall not use, disclose, or retain endowment, donor, alumni, or student data for any purpose outside the scope of this engagement, both during and after the engagement period, consistent with the confidentiality clause in Section~\ref{sec:scope}.
+\end{itemize}
+
+\subsection{Security Requirements}
+\label{sec:security}
+Given the sensitivity of the data described above, the Platform shall implement, at minimum:
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item \textbf{Secure credential storage:} database credentials, LLM/API keys, and email account credentials shall be stored using environment variables or a secrets manager; no such credentials shall be committed to the source repository at any time (Section~\ref{sec:version-control}).
+\item \textbf{Encryption in transit:} HTTPS/TLS for all access to the Platform, and encryption at rest for the production database where supported by the hosting environment.
+\item \textbf{Role-based, least-privilege access control:} enforced at the server/API layer for every module, consistent with Section~\ref{sec:roles}, and not merely hidden in the user interface.
+\item \textbf{Access logging:} recording of login attempts and access to sensitive records, in addition to the action-level audit log described in Section~\ref{sec:audit}.
+\item \textbf{Secure session management:} including session expiry/timeout and protection against common session-hijacking and cross-site request forgery risks.
+\item \textbf{Backups and recovery testing:} regular, documented backups of the production database, with periodic (at least once per phase) testing of the recovery procedure to confirm that backups are restorable.
+\item \textbf{Vulnerability/security testing:} basic vulnerability and security testing of the Platform (e.g., dependency vulnerability scanning and a review of common web-application vulnerabilities) prior to each phase's production deployment, with identified critical/high-severity issues remediated before go-live.
+\end{itemize}
+
+% ---------------- SECTION 10 ----------------
+\section{Documentation, Deployment and Post-Deployment Support}
+\label{sec:docs}
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item \textbf{Deployment documentation:} environment setup, hosting configuration, and the steps required to redeploy or migrate the Platform.
+\item \textbf{Administrator manual:} covering role management and configuration of rules (fund categories, eligibility criteria, approval thresholds) and other routine administrative tasks.
+\item \textbf{User manual:} covering day-to-day usage of the Platform for each role defined in Section~\ref{sec:roles}.
+\item \textbf{Database and API documentation:} a schema reference and endpoint documentation sufficient for another development team to maintain the system after handover.
+\item \textbf{Third-party component inventory:} the licensing inventory described in Section~\ref{sec:licensing}.
+\item \textbf{Backup and recovery procedures:} a documented backup schedule and a tested recovery process, consistent with Section~\ref{sec:security}.
+\item \textbf{Post-deployment bug-fix support:} the Team proposes a bug-fix support period of four (4) weeks from the date of written acceptance and handover of each phase (Section~\ref{sec:deliverables}), covering defects in delivered functionality only; the exact duration is subject to mutual written agreement and does not itself constitute a commitment to new feature development.
+\end{itemize}
+
+% ---------------- SECTION 11 ----------------
+\section{Duration and Termination}
+\label{sec:duration}
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item This agreement shall commence on the date of signature by both parties. The Team targets completion, successful UAT (Section~\ref{sec:deliverables}), and handover of \textbf{Phase I} to DORA by \textbf{1 December 2026}, this being the agreed target date. Timelines for Phase II and Phase III will be proposed once those phases are separately commissioned (Section~\ref{sec:oos}).
+\item Any extension of the Phase I target date shall require written justification from the Development Team, explaining the reason for the delay, and the prior written approval of DORA. The target date shall not be treated as extended merely because requirements evolve during Phase I; any such extension request follows the material-change approval process in Section~\ref{sec:iterative}.
+\item In the event of termination, compensation shall be payable for all verified work completed up to the effective date of termination, within the ceiling described in Section~\ref{sec:ceiling}, following Section~\ref{sec:compensation}.
+\end{itemize}
+
+% ---------------- SECTION 12 ----------------
+\section{Acceptance and Signatures}
+By signing below, both parties acknowledge that they have read, understood, and agree to the terms described in this document, including that the technical scope in Section~\ref{sec:scope} is phased and that only Phase I is presently commissioned; that Phase I completion is governed by the deliverables and acceptance criteria in Section~\ref{sec:deliverables}; that Phase I compensation is subject to the financial ceiling in Section~\ref{sec:ceiling}; and that Phase II/III and any material change to scope, timeline, cost, architecture, security, or infrastructure require the prior written approval described in Section~\ref{sec:iterative} and Section~\ref{sec:compensation}.
+
+\vspace{1cm}
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{For the Dean's Office of Resource Generation and Alumni Relations, IIT Mandi}\\[1.4cm]
+\underline{\hspace{6.5cm}}\\
+Name: Prof. Varun Dutt\\[6pt]
+Designation: Dean, Resource Generation\\ and Alumni Relations (DORA)\\[6pt]
+Date:\underline{\hspace{5.5cm}}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{For the Student Development Team}\\[6pt]
+\underline{\hspace{6.5cm}}\\
+Name: Sachit Bansal (B24350)\\
+Designation: Team Lead\\
+Date:\underline{\hspace{5.5cm}}
+\end{minipage}
+
+\vspace{1cm}
+\textbf{Other Team Members (Acknowledgement of Terms):}
+
+\begin{tabular}{@{}p{7.5cm}p{6cm}@{}}
+1. Harshit Anand (B24128) & Signature: \underline{\hspace{3.5cm}} \\[10pt]
+2. Jayjit Singh (B24131) & Signature: \underline{\hspace{3.5cm}} \\[10pt]
+3. Jashnoor Singh (B24337) & Signature: \underline{\hspace{3.5cm}} \\
+\end{tabular}
+
+\end{document}
