@@ -168,16 +168,6 @@ Four students (Section 5): **Sachit Bansal** (Team Lead, point of contact), Hars
 
 `docs/session-notes-2026-08-22-frontend-ui.md` — context dump from the session that scaffolded the demo frontend. A dated record: don't edit it to match the code. Its routes say `/dashboard` (renamed `/staff` in e707efc) and it predates the donor portal.
 
-## If a root `CLAUDE.md` reappears
+## The root `CLAUDE.md` and `AGENTS.md` are generated
 
-`next dev` writes the block below to a `CLAUDE.md` at the **project root**. This project file lives at `.claude/CLAUDE.md`, so a root `CLAUDE.md` containing only that block may reappear on its own. That stub is not the project doc — this file is. Don't move project instructions into it and don't treat it as authoritative.
-
-<!-- BEGIN:nextjs-agent-rules -->
-
-# This is NOT the Next.js you know
-
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
-
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
-
-<!-- END:nextjs-agent-rules -->
+`next dev` writes them itself: `AGENTS.md` holds Next's own agent-rules block, and the root `CLAUDE.md` is a one-line `@AGENTS.md` import that pulls it in. Both are regenerated on every `next dev` — editing them is pointless, and neither is the project doc. **This file is.** Disable with `agentRules: false` in `next.config.ts` if they ever get in the way.
