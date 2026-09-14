@@ -46,3 +46,7 @@ next-env.d.ts
 # .claude/CLAUDE.md, which is the real project doc and is tracked.
 /CLAUDE.md
 /AGENTS.md
+
+# per-machine hours-tracking hook state (raw session timestamps/commits,
+# not the actual log — that's docs/hours-log/, which is tracked)
+/.claude/hours/
